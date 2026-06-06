@@ -429,6 +429,23 @@ const translations: Record<Locale, Record<string, string>> = {
     'agents.start_quickstart': '开始快速入门',
     'agents.load_error': '加载智能体失败',
     'agents.toggle_error': '切换 {alias} 失败',
+
+    // Canvas
+    'canvas.title': '实时画布',
+    'canvas.connected': '已连接',
+    'canvas.disconnected': '已断开',
+    'canvas.toggle_history': '切换历史记录',
+    'canvas.clear_canvas': '清除画布',
+    'canvas.reconnect': '重新连接',
+    'canvas.canvas_id': '画布 ID',
+    'canvas.switch': '切换',
+    'canvas.active': '活跃',
+    'canvas.waiting_content': '等待画布 <span className="font-mono">"{canvasId}"</span> 的内容',
+    'canvas.agent_push_hint': '智能体可以使用画布工具将内容推送到此处',
+    'canvas.frame_history': '帧历史 ({count})',
+    'canvas.no_frames': '暂无帧',
+    'canvas.type': '类型',
+    'canvas.frame': '帧',
   },
 
   en: {
@@ -865,6 +882,23 @@ const translations: Record<Locale, Record<string, string>> = {
     'agents.start_quickstart': 'Start Quickstart',
     'agents.load_error': 'Failed to load agents',
     'agents.toggle_error': 'Failed to toggle {alias}',
+
+    // Canvas
+    'canvas.title': 'Live Canvas',
+    'canvas.connected': 'Connected',
+    'canvas.disconnected': 'Disconnected',
+    'canvas.toggle_history': 'Toggle history',
+    'canvas.clear_canvas': 'Clear canvas',
+    'canvas.reconnect': 'Reconnect',
+    'canvas.canvas_id': 'Canvas ID',
+    'canvas.switch': 'Switch',
+    'canvas.active': 'Active',
+    'canvas.waiting_content': 'Waiting for content on canvas <span className="font-mono">"{canvasId}"</span>',
+    'canvas.agent_push_hint': 'The agent can push content here using the canvas tool',
+    'canvas.frame_history': 'Frame History ({count})',
+    'canvas.no_frames': 'No frames yet',
+    'canvas.type': 'Type',
+    'canvas.frame': 'Frame',
   },
 
   tr: {
@@ -1232,6 +1266,23 @@ const translations: Record<Locale, Record<string, string>> = {
     'theme.dark': 'Koyu',
     'theme.light': 'Açık',
     'theme.oled': 'OLED Siyah',
+
+    // Canvas
+    'canvas.title': 'Canlı Tuval',
+    'canvas.connected': 'Bağlı',
+    'canvas.disconnected': 'Bağlantı kesildi',
+    'canvas.toggle_history': 'Geçmişi aç/kapat',
+    'canvas.clear_canvas': 'Tuvali temizle',
+    'canvas.reconnect': 'Yeniden bağlan',
+    'canvas.canvas_id': 'Tuval Kimliği',
+    'canvas.switch': 'Değiştir',
+    'canvas.active': 'Aktif',
+    'canvas.waiting_content': '<span className="font-mono">"{canvasId}"</span> tuvalinde içerik bekleniyor',
+    'canvas.agent_push_hint': 'Aracı, tuval aracını kullanarak buraya içerik gönderebilir',
+    'canvas.frame_history': 'Kare Geçmişi ({count})',
+    'canvas.no_frames': 'Henüz kare yok',
+    'canvas.type': 'Tür',
+    'canvas.frame': 'Kare',
   },
 
   ar: {
@@ -1587,6 +1638,23 @@ const translations: Record<Locale, Record<string, string>> = {
     'theme.dark': 'داكن',
     'theme.light': 'فاتح',
     'theme.oled': 'OLED أسود',
+
+    // Canvas
+    'canvas.title': 'لوحة مباشرة',
+    'canvas.connected': 'متصل',
+    'canvas.disconnected': 'غير متصل',
+    'canvas.toggle_history': 'تبديل السجل',
+    'canvas.clear_canvas': 'مسح اللوحة',
+    'canvas.reconnect': 'إعادة الاتصال',
+    'canvas.canvas_id': 'معرف اللوحة',
+    'canvas.switch': 'تبديل',
+    'canvas.active': 'نشط',
+    'canvas.waiting_content': 'في انتظار المحتوى على اللوحة <span className="font-mono">"{canvasId}"</span>',
+    'canvas.agent_push_hint': 'يمكن للوكيل دفع المحتوى هنا باستخدام أداة اللوحة',
+    'canvas.frame_history': 'سجل الإطارات ({count})',
+    'canvas.no_frames': 'لا توجد إطارات بعد',
+    'canvas.type': 'النوع',
+    'canvas.frame': 'الإطار',
   },
 
   bn: {

@@ -3,6 +3,7 @@ import { Monitor, Trash2, History, RefreshCw } from 'lucide-react';
 import { apiFetch } from '@/lib/api';
 import { basePath } from '@/lib/basePath';
 import { getToken } from '@/lib/auth';
+import { t } from '@/lib/i18n';
 
 interface CanvasFrame {
   frame_id: string;
@@ -199,7 +200,7 @@ export default function Canvas() {
         <div className="flex items-center gap-3">
           <Monitor className="h-6 w-6" style={{ color: 'var(--pc-accent)' }} />
           <h1 className="text-xl font-semibold" style={{ color: 'var(--pc-text-primary)' }}>
-            Live Canvas
+            {t('canvas.title')}
           </h1>
           <span
             className="text-xs px-2 py-0.5 rounded-full font-medium"
@@ -208,7 +209,7 @@ export default function Canvas() {
               color: connected ? '#22c55e' : '#ef4444',
             }}
           >
-            {connected ? 'Connected' : 'Disconnected'}
+            {connected ? t('canvas.connected') : t('canvas.disconnected')}
           </span>
         </div>
         <div className="flex items-center gap-2">
@@ -216,7 +217,7 @@ export default function Canvas() {
             onClick={() => setShowHistory(!showHistory)}
             className="p-2 rounded-lg transition-colors hover:opacity-80"
             style={{ background: 'var(--pc-bg-elevated)', color: 'var(--pc-text-muted)' }}
-            title="Toggle history"
+            title={t('canvas.toggle_history')}
           >
             <History className="h-4 w-4" />
           </button>
@@ -224,7 +225,7 @@ export default function Canvas() {
             onClick={handleClear}
             className="p-2 rounded-lg transition-colors hover:opacity-80"
             style={{ background: 'var(--pc-bg-elevated)', color: 'var(--pc-text-muted)' }}
-            title="Clear canvas"
+            title={t('canvas.clear_canvas')}
           >
             <Trash2 className="h-4 w-4" />
           </button>
@@ -232,7 +233,7 @@ export default function Canvas() {
             onClick={() => connectWs(canvasId)}
             className="p-2 rounded-lg transition-colors hover:opacity-80"
             style={{ background: 'var(--pc-bg-elevated)', color: 'var(--pc-text-muted)' }}
-            title="Reconnect"
+            title={t('canvas.reconnect')}
           >
             <RefreshCw className="h-4 w-4" />
           </button>
@@ -246,7 +247,7 @@ export default function Canvas() {
           value={canvasIdInput}
           onChange={(e) => setCanvasIdInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSwitchCanvas()}
-          placeholder="Canvas ID"
+          placeholder={t('canvas.canvas_id')}
           className="px-3 py-1.5 rounded-lg text-sm border"
           style={{
             background: 'var(--pc-bg-elevated)',
@@ -259,11 +260,11 @@ export default function Canvas() {
           className="px-3 py-1.5 rounded-lg text-sm font-medium"
           style={{ background: 'var(--pc-accent)', color: '#fff' }}
         >
-          Switch
+          {t('canvas.switch')}
         </button>
         {canvasList.length > 0 && (
           <div className="flex items-center gap-1 ml-2">
-            <span className="text-xs" style={{ color: 'var(--pc-text-muted)' }}>Active:</span>
+            <span className="text-xs" style={{ color: 'var(--pc-text-muted)' }}>{t('canvas.active')}:</span>
             {canvasList.map((id) => (
               <button
                 key={id}
@@ -309,11 +310,9 @@ export default function Canvas() {
                   className="h-12 w-12 mx-auto mb-3 opacity-30"
                   style={{ color: 'var(--pc-text-muted)' }}
                 />
-                <p className="text-sm" style={{ color: 'var(--pc-text-muted)' }}>
-                  Waiting for content on canvas <span className="font-mono">"{canvasId}"</span>
-                </p>
+                <p className="text-sm" style={{ color: 'var(--pc-text-muted)' }} dangerouslySetInnerHTML={{ __html: t('canvas.waiting_content') }} />
                 <p className="text-xs mt-1" style={{ color: 'var(--pc-text-muted)', opacity: 0.6 }}>
-                  The agent can push content here using the canvas tool
+                  {t('canvas.agent_push_hint')}
                 </p>
               </div>
             </div>
@@ -337,11 +336,11 @@ export default function Canvas() {
                 color: 'var(--pc-text-muted)',
               }}
             >
-              Frame History ({history.length})
+              {t('canvas.frame_history').replace('{count}', history.length.toString())}
             </div>
             {history.length === 0 ? (
               <p className="p-3 text-xs" style={{ color: 'var(--pc-text-muted)' }}>
-                No frames yet
+                {t('canvas.no_frames')}
               </p>
             ) : (
               <div className="space-y-1 p-2">
@@ -388,7 +387,7 @@ export default function Canvas() {
           style={{ background: 'var(--pc-bg-elevated)', color: 'var(--pc-text-muted)' }}
         >
           <span>
-            Type: <span className="font-mono">{currentFrame.content_type}</span> | Frame:{' '}
+            {t('canvas.type')}：<span className="font-mono">{currentFrame.content_type}</span> | {t('canvas.frame')}:{' '}
             <span className="font-mono">{currentFrame.frame_id.substring(0, 8)}</span>
           </span>
           <span>{new Date(currentFrame.timestamp).toLocaleString()}</span>
