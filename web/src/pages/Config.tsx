@@ -15,6 +15,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, ChevronRight, Plus, Sparkles, Trash2 } from "lucide-react";
+import { t } from "@/lib/i18n";
 import {
   ApiError,
   deleteMapKey,
@@ -69,6 +70,19 @@ const GROUP_ORDER = [
 // pre-ordered by `zeroclaw_config::sections::QUICKSTART_SECTIONS`
 // (single canonical source). The dashboard preserves response order for
 // the Foundation group instead of carrying its own copy of the list.
+
+// Group name translations
+const GROUP_NAME_MAP: Record<string, string> = {
+  "Foundation": "基础配置",
+  "Agent": "智能体",
+  "Multi-agent": "多智能体",
+  "Tools": "工具",
+  "Integrations": "集成",
+  "Network": "网络",
+  "Storage": "存储",
+  "Operations": "运维",
+  "Other": "其他",
+};
 
 export default function Config() {
   // URL params drive the view. No internal mode state for picker/form —
@@ -258,7 +272,7 @@ export default function Config() {
             className="btn-secondary inline-flex items-center gap-2 text-sm px-3 py-1.5 self-start"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back
+            {t("common.back")}
           </button>
           <WireTabForm
             key={`${reloadKey}-${fieldsPrefix}`}
@@ -285,7 +299,7 @@ export default function Config() {
         extraTabs.push(
           {
             key: "peer_groups",
-            label: "Peer Groups",
+            label: t("config.peer_groups"),
             render: () => (
               <AgentPeerGroupsTab
                 key={`${reloadKey}-${typeParam}-peer_groups`}
@@ -296,7 +310,7 @@ export default function Config() {
           },
           {
             key: "personality",
-            label: "Personality",
+            label: t("config.personality"),
             render: () => (
               <PersonalityEditor
                 key={`${reloadKey}-${typeParam}-personality`}
@@ -308,7 +322,7 @@ export default function Config() {
       } else if (isSkillBundle) {
         extraTabs.push({
           key: "skills",
-          label: "Skills",
+          label: t("config.skills"),
           render: () => (
             <SkillsBundleEditor
               key={`${reloadKey}-${typeParam}-skills`}
@@ -328,7 +342,7 @@ export default function Config() {
             className="btn-secondary inline-flex items-center gap-2 text-sm px-3 py-1.5 self-start"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to {activeSection.label}
+            {t("common.back")} {activeSection.label}
           </button>
           <WireTabForm
             key={`${reloadKey}-${fieldsPrefix}`}
@@ -366,10 +380,10 @@ export default function Config() {
         return (
           <SectionTabs
             tabs={[
-              { key: "aliases", label: "Aliases", render: () => aliasListPane },
+              { key: "aliases", label: t("config.aliases"), render: () => aliasListPane },
               {
                 key: "costs",
-                label: "Costs",
+                label: t("cost.title"),
                 render: () => (
                   <CostRatesEditor
                     category={costsCategory}
@@ -398,7 +412,7 @@ export default function Config() {
             className="btn-secondary inline-flex items-center gap-2 text-sm px-3 py-1.5 self-start"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to {activeSection.label}
+            {t("common.back")} {activeSection.label}
           </button>
           <FieldForm
             key={`${reloadKey}-${typeParam}`}
@@ -477,7 +491,7 @@ export default function Config() {
 
   // Breadcrumb segments
   const crumbs: Array<{ label: string; url?: string }> = [
-    { label: "Config", url: "/config" },
+    { label: t("config.title"), url: "/config" },
     {
       label: activeSection?.label ?? "",
       url: activeSection
@@ -531,7 +545,7 @@ export default function Config() {
                     className="px-4 pt-4 pb-1.5 text-xs font-semibold uppercase tracking-wider"
                     style={{ color: "var(--pc-text-secondary)" }}
                   >
-                    {groupName}
+                    {t(`config.group.${groupName.toLowerCase()}`) || GROUP_NAME_MAP[groupName] || groupName}
                   </div>
                   {items.map((s) => (
                     <button
