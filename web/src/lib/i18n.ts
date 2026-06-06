@@ -398,6 +398,37 @@ const translations: Record<Locale, Record<string, string>> = {
     'theme.dark': '深色',
     'theme.light': '浅色',
     'theme.oled': '纯黑',
+
+    // Workspace Explorer
+    'workspace.title': '工作区',
+    'workspace.back_to': '返回 {alias}',
+    'workspace.new_folder': '新建文件夹',
+    'workspace.new_folder_title': '在当前目录创建新文件夹',
+    'workspace.refresh': '刷新',
+    'workspace.up_one_level': '.. (上一级)',
+    'workspace.empty': '(空)',
+    'workspace.protected_hint': '受保护 — 由运行时拥有，无法从仪表板重命名或删除',
+    'workspace.rename_move': '重命名/移动',
+    'workspace.delete': '删除',
+    'workspace.select_file_hint': '选择文件以查看其内容',
+    'workspace.binary_file_hint': '二进制文件 ({size})。预览为 base64 编码；请通过 CLI 下载以检查。',
+    'workspace.delete_confirm_dir': '确定要从 {alias} 的工作区删除目录 "{full}" 吗？其中的所有内容都将被删除。此操作无法撤销。',
+    'workspace.delete_confirm_file': '确定要从 {alias} 的工作区删除文件 "{full}" 吗？此操作无法撤销。',
+    'workspace.new_folder_prompt': '新文件夹名称（位于 agents/{alias}/workspace/{cwd}）：',
+    'workspace.folder_name_invalid': '文件夹名称不能包含 \'..\'',
+    'workspace.rename_prompt': '将 "{name}" 重命名为：',
+    'workspace.rename_target_invalid': '重命名目标不能包含 \'..\'',
+
+    // Agents List
+    'agents.title': '智能体列表',
+    'agents.subtitle': '此 ZeroClaw 实例上配置的智能体。',
+    'agents.new_agent': '新建智能体',
+    'agents.loading': '加载智能体中...',
+    'agents.no_agents_title': '尚未配置智能体',
+    'agents.no_agents_subtitle': '运行快速入门以创建您的第一个智能体。',
+    'agents.start_quickstart': '开始快速入门',
+    'agents.load_error': '加载智能体失败',
+    'agents.toggle_error': '切换 {alias} 失败',
   },
 
   en: {
@@ -803,6 +834,37 @@ const translations: Record<Locale, Record<string, string>> = {
     'theme.dark': 'Dark',
     'theme.light': 'Light',
     'theme.oled': 'OLED Black',
+
+    // Workspace Explorer
+    'workspace.title': 'Workspace',
+    'workspace.back_to': 'Back to {alias}',
+    'workspace.new_folder': 'New folder',
+    'workspace.new_folder_title': 'Create a new folder in the current directory',
+    'workspace.refresh': 'Refresh',
+    'workspace.up_one_level': '.. (up one level)',
+    'workspace.empty': '(empty)',
+    'workspace.protected_hint': 'Protected — owned by the runtime, cannot be renamed or deleted from the dashboard',
+    'workspace.rename_move': 'Rename / move',
+    'workspace.delete': 'Delete',
+    'workspace.select_file_hint': 'Select a file to view its contents.',
+    'workspace.binary_file_hint': 'Binary file ({size}). Preview is base64-encoded; download via CLI to inspect.',
+    'workspace.delete_confirm_dir': 'Delete directory "{full}" from {alias}\'s workspace? Everything inside it goes too. This cannot be undone.',
+    'workspace.delete_confirm_file': 'Delete file "{full}" from {alias}\'s workspace? This cannot be undone.',
+    'workspace.new_folder_prompt': 'New folder name (under agents/{alias}/workspace/{cwd}):',
+    'workspace.folder_name_invalid': "Folder name cannot contain '..'",
+    'workspace.rename_prompt': 'Rename "{name}" to:',
+    'workspace.rename_target_invalid': "Rename target cannot contain '..'",
+
+    // Agents List
+    'agents.title': 'Agents',
+    'agents.subtitle': 'Configured agents on this ZeroClaw instance.',
+    'agents.new_agent': 'New Agent',
+    'agents.loading': 'Loading agents...',
+    'agents.no_agents_title': 'No agents configured yet',
+    'agents.no_agents_subtitle': 'Run Quickstart to create your first agent.',
+    'agents.start_quickstart': 'Start Quickstart',
+    'agents.load_error': 'Failed to load agents',
+    'agents.toggle_error': 'Failed to toggle {alias}',
   },
 
   tr: {
@@ -11166,6 +11228,17 @@ const translations: Record<Locale, Record<string, string>> = {
     'theme.dark': 'Tối',
     'theme.light': 'Sáng',
     'theme.oled': 'OLED đen',
+
+    // Agents List
+    'agents.title': 'Danh sách Agent',
+    'agents.subtitle': 'Các agent đã cấu hình trên instance ZeroClaw này.',
+    'agents.new_agent': 'Agent mới',
+    'agents.loading': 'Đang tải agent...',
+    'agents.no_agents_title': 'Chưa có agent nào được cấu hình',
+    'agents.no_agents_subtitle': 'Chạy Quickstart để tạo agent đầu tiên của bạn.',
+    'agents.start_quickstart': 'Bắt đầu Quickstart',
+    'agents.load_error': 'Không thể tải agent',
+    'agents.toggle_error': 'Không thể chuyển đổi {alias}',
   },
 };
 

@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Bot, Plus, AlertCircle } from 'lucide-react';
+import { t } from '@/lib/i18n';
 import AgentCard from '@/components/AgentCard';
 import { loadAgentSummaries, toggleAgentEnabled, type AgentSummary } from '@/lib/agents';
 
@@ -25,7 +26,7 @@ export default function AgentsList() {
       .catch((err: unknown) =>
         setState({
           loading: false,
-          error: err instanceof Error ? err.message : 'Failed to load agents',
+          error: err instanceof Error ? err.message : t('agents.load_error'),
           agents: [],
         }),
       );
@@ -48,7 +49,7 @@ export default function AgentsList() {
     } catch (err) {
       setState((s) => ({
         ...s,
-        error: err instanceof Error ? err.message : `Failed to toggle ${agent.alias}`,
+        error: err instanceof Error ? err.message : `${t('agents.toggle_error').replace('{alias}', agent.alias)}`,
       }));
     } finally {
       setToggling((prev) => {
@@ -67,10 +68,10 @@ export default function AgentsList() {
             className="text-2xl font-semibold"
             style={{ color: 'var(--pc-text-primary)' }}
           >
-            Agents
+            {t('agents.title')}
           </h1>
           <p className="text-sm mt-1" style={{ color: 'var(--pc-text-muted)' }}>
-            Configured agents on this ZeroClaw instance.
+            {t('agents.subtitle')}
           </p>
         </div>
         <Link
@@ -78,7 +79,7 @@ export default function AgentsList() {
           className="btn-electric flex items-center gap-2 px-4 py-2 rounded-xl text-sm"
         >
           <Plus className="h-4 w-4" />
-          New Agent
+          {t('agents.new_agent')}
         </Link>
       </header>
 
@@ -104,7 +105,7 @@ export default function AgentsList() {
             color: 'var(--pc-text-muted)',
           }}
         >
-          Loading agents...
+          {t('agents.loading')}
         </div>
       ) : state.agents.length === 0 ? (
         <EmptyState />
@@ -140,17 +141,17 @@ function EmptyState() {
         className="text-base font-medium mb-1"
         style={{ color: 'var(--pc-text-primary)' }}
       >
-        No agents configured yet
+        {t('agents.no_agents_title')}
       </p>
       <p className="text-sm mb-4" style={{ color: 'var(--pc-text-muted)' }}>
-        Run Quickstart to create your first agent.
+        {t('agents.no_agents_subtitle')}
       </p>
       <Link
         to="/quickstart"
         className="btn-electric inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm"
       >
         <Plus className="h-4 w-4" />
-        Start Quickstart
+        {t('agents.start_quickstart')}
       </Link>
     </div>
   );
