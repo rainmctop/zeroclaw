@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { t } from '@/lib/i18n';
 import {
   ArrowLeft,
   ArrowUp,
@@ -94,13 +95,10 @@ export default function AgentWorkspaceExplorer() {
 
   const deletePath = async (name: string, kind: 'dir' | 'file') => {
     const full = cwd ? `${cwd}/${name}` : name;
-    if (
-      !window.confirm(
-        `Delete ${kind === 'dir' ? 'directory' : 'file'} "${full}" from ${alias}'s workspace? ${
-          kind === 'dir' ? 'Everything inside it goes too.' : ''
-        } This cannot be undone.`,
-      )
-    ) {
+    const confirmMsg = kind === 'dir' 
+      ? t('workspace.delete_confirm_dir').replace('{full}', full).replace('{alias}', alias)
+      : t('workspace.delete_confirm_file').replace('{full}', full).replace('{alias}', alias);
+    if (!window.confirm(confirmMsg)) {
       return;
     }
     setBusy(full);
@@ -120,15 +118,16 @@ export default function AgentWorkspaceExplorer() {
   };
 
   const createDirectory = async () => {
+    const cwdDisplay = cwd ? `${cwd}/` : '';
     const name = window.prompt(
-      `New folder name (under agents/${alias}/workspace/${cwd ? `${cwd}/` : ''}):`,
+      t('workspace.new_folder_prompt').replace('{alias}', alias).replace('{cwd}', cwdDisplay),
       '',
     );
     if (!name) return;
     const trimmed = name.trim().replace(/^\/+|\/+$/g, '');
     if (!trimmed) return;
     if (trimmed.includes('..')) {
-      setError("Folder name cannot contain '..'");
+      setError(t('workspace.folder_name_invalid'));
       return;
     }
     const full = cwd ? `${cwd}/${trimmed}` : trimmed;
@@ -146,10 +145,10 @@ export default function AgentWorkspaceExplorer() {
 
   const renamePath = async (name: string) => {
     const from = cwd ? `${cwd}/${name}` : name;
-    const next = window.prompt(`Rename "${name}" to:`, name);
+    const next = window.prompt(t('workspace.rename_prompt').replace('{name}', name), name);
     if (!next || next === name) return;
     if (next.includes('..')) {
-      setError("Rename target cannot contain '..'");
+      setError(t('workspace.rename_target_invalid'));
       return;
     }
     const to = cwd ? `${cwd}/${next}` : next;
@@ -174,13 +173,13 @@ export default function AgentWorkspaceExplorer() {
           className="btn-secondary inline-flex items-center gap-2 text-sm px-3 py-1.5"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to {alias}
+          {t('workspace.back_to').replace('{alias}', alias)}
         </Link>
         <h1
           className="text-lg font-semibold"
           style={{ color: 'var(--pc-text-primary)' }}
         >
-          Workspace
+          {t('workspace.title')}
         </h1>
         <code
           className="text-xs font-mono truncate"
@@ -193,16 +192,16 @@ export default function AgentWorkspaceExplorer() {
             type="button"
             onClick={() => void createDirectory()}
             className="btn-secondary inline-flex items-center gap-1.5 text-sm px-3 py-1.5"
-            title="Create a new folder in the current directory"
+            title={t('workspace.new_folder_title')}
           >
             <FolderPlus className="h-4 w-4" />
-            New folder
+            {t('workspace.new_folder')}
           </button>
           <button
             type="button"
             onClick={() => setReloadTick((n) => n + 1)}
             className="btn-icon"
-            title="Refresh"
+            title={t('workspace.refresh')}
           >
             <RefreshCw className="h-4 w-4" />
           </button>
@@ -240,7 +239,7 @@ export default function AgentWorkspaceExplorer() {
                   style={{ color: 'var(--pc-text-secondary)' }}
                 >
                   <ArrowUp className="h-3.5 w-3.5 flex-shrink-0" />
-                  .. (up one level)
+                  {t('workspace.up_one_level')}
                 </button>
               </li>
             )}
@@ -259,7 +258,7 @@ export default function AgentWorkspaceExplorer() {
                 className="px-3 py-3 text-xs italic"
                 style={{ color: 'var(--pc-text-faint)' }}
               >
-                (empty)
+                {t('workspace.empty')}
               </li>
             ) : (
               entries.map((entry) => {
@@ -311,7 +310,7 @@ export default function AgentWorkspaceExplorer() {
                       {entry.protected ? (
                         <span
                           className="px-2 flex items-center"
-                          title="Protected — owned by the runtime, cannot be renamed or deleted from the dashboard"
+                          title={t('workspace.protected_hint')}
                           style={{ color: 'var(--pc-text-faint)' }}
                         >
                           <Lock className="h-3.5 w-3.5" />
@@ -322,7 +321,7 @@ export default function AgentWorkspaceExplorer() {
                             type="button"
                             onClick={() => void renamePath(entry.name)}
                             disabled={busy === full}
-                            title="Rename / move"
+                            title={t('workspace.rename_move')}
                             className="px-2 opacity-60 hover:opacity-100 disabled:opacity-30"
                             style={{ color: 'var(--pc-text-muted)' }}
                           >
@@ -332,7 +331,7 @@ export default function AgentWorkspaceExplorer() {
                             type="button"
                             onClick={() => void deletePath(entry.name, entry.kind)}
                             disabled={busy === full}
-                            title="Delete"
+                            title={t('workspace.delete')}
                             className="px-2 opacity-60 hover:opacity-100 disabled:opacity-30"
                             style={{ color: 'var(--color-status-error)' }}
                           >
@@ -404,8 +403,7 @@ export default function AgentWorkspaceExplorer() {
                     </pre>
                   ) : (
                     <p className="text-sm" style={{ color: 'var(--pc-text-muted)' }}>
-                      Binary file ({formatBytes(viewer.size)}). Preview is base64-
-                      encoded; download via CLI to inspect.
+                      {t('workspace.binary_file_hint').replace('{size}', formatBytes(viewer.size))}
                     </p>
                   )
                 ) : null}
@@ -416,7 +414,7 @@ export default function AgentWorkspaceExplorer() {
               className="flex-1 flex items-center justify-center text-sm"
               style={{ color: 'var(--pc-text-faint)' }}
             >
-              Select a file to view its contents.
+              {t('workspace.select_file_hint')}
             </div>
           )}
         </div>
